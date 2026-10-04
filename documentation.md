@@ -894,13 +894,13 @@ Returns all operations for the given :blockNum.
 interface BlocksGetOpsInBlockArgs {
   blockNum: number;  // int · 1…110139661
   withVirtualOps?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
-  opTypes?: string | string[];  // fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
+  opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];  // fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
 }
 
 getOpsInBlock<T = SDSJsonArray>(args: BlocksGetOpsInBlockArgs, callback: Callback<T>): Promise<void>;
 getOpsInBlock<T = SDSJsonArray>(args: BlocksGetOpsInBlockArgs): Promise<T>;
-getOpsInBlock<T = SDSJsonArray>(blockNum: number, withVirtualOps: boolean | undefined, opTypes: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getOpsInBlock<T = SDSJsonArray>(blockNum: number, withVirtualOps?: boolean, opTypes?: string | string[]): Promise<T>;
+getOpsInBlock<T = SDSJsonArray>(blockNum: number, withVirtualOps: boolean | undefined, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getOpsInBlock<T = SDSJsonArray>(blockNum: number, withVirtualOps?: boolean, opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -946,13 +946,13 @@ interface BlocksGetOpsInBlockRangeArgs {
   fromBlockNum: number;  // int · 1…110139661
   toBlockNum: number;  // int · 1…110139661
   withVirtualOps?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
-  opTypes?: string | string[];  // fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
+  opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];  // fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
 }
 
 getOpsInBlockRange<T = SDSJsonArray>(args: BlocksGetOpsInBlockRangeArgs, callback: Callback<T>): Promise<void>;
 getOpsInBlockRange<T = SDSJsonArray>(args: BlocksGetOpsInBlockRangeArgs): Promise<T>;
-getOpsInBlockRange<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getOpsInBlockRange<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: string | string[]): Promise<T>;
+getOpsInBlockRange<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getOpsInBlockRange<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -998,13 +998,13 @@ interface BlocksGetOpsInBlockRangeAsArrayArgs {
   fromBlockNum: number;  // int · 1…110139661
   toBlockNum: number;  // int · 1…110139661
   withVirtualOps?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
-  opTypes?: string | string[];  // fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
+  opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];  // fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
 }
 
 getOpsInBlockRangeAsArray<T = SDSJsonArray>(args: BlocksGetOpsInBlockRangeAsArrayArgs, callback: Callback<T>): Promise<void>;
 getOpsInBlockRangeAsArray<T = SDSJsonArray>(args: BlocksGetOpsInBlockRangeAsArrayArgs): Promise<T>;
-getOpsInBlockRangeAsArray<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getOpsInBlockRangeAsArray<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: string | string[]): Promise<T>;
+getOpsInBlockRangeAsArray<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getOpsInBlockRangeAsArray<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -1050,13 +1050,13 @@ interface BlocksGetOpsInBlockRangeGroupedArgs {
   fromBlockNum: number;  // int · 1…110139661
   toBlockNum: number;  // int · 1…110139661
   withVirtualOps?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
-  opTypes?: string | string[];  // fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
+  opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];  // fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
 }
 
 getOpsInBlockRangeGrouped<T = SDSJsonObject>(args: BlocksGetOpsInBlockRangeGroupedArgs, callback: Callback<T>): Promise<void>;
 getOpsInBlockRangeGrouped<T = SDSJsonObject>(args: BlocksGetOpsInBlockRangeGroupedArgs): Promise<T>;
-getOpsInBlockRangeGrouped<T = SDSJsonObject>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getOpsInBlockRangeGrouped<T = SDSJsonObject>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: string | string[]): Promise<T>;
+getOpsInBlockRangeGrouped<T = SDSJsonObject>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getOpsInBlockRangeGrouped<T = SDSJsonObject>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -1786,13 +1786,13 @@ Returns the cached Steem requests for the given :ids
 
 ```ts
 interface SteemRequestsGetByIdArgs {
-  ids: string | string[];  // fixed_csv · one of: 1 | 2 | 3 | 4 | … (9 values)
+  ids: SteemRequestsApiIdsCsv | `${SteemRequestsApiIdsCsv},${string}` | SteemRequestsApiIdsCsv[];  // fixed_csv · one of: 1 | 2 | 3 | 4 | … (9 values)
 }
 
 getById<T = SDSJsonObject>(args: SteemRequestsGetByIdArgs, callback: Callback<T>): Promise<void>;
 getById<T = SDSJsonObject>(args: SteemRequestsGetByIdArgs): Promise<T>;
-getById<T = SDSJsonObject>(ids: string | string[], callback: Callback<T>): Promise<void>;
-getById<T = SDSJsonObject>(ids: string | string[]): Promise<T>;
+getById<T = SDSJsonObject>(ids: SteemRequestsApiIdsCsv | `${SteemRequestsApiIdsCsv},${string}` | SteemRequestsApiIdsCsv[], callback: Callback<T>): Promise<void>;
+getById<T = SDSJsonObject>(ids: SteemRequestsApiIdsCsv | `${SteemRequestsApiIdsCsv},${string}` | SteemRequestsApiIdsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -2410,13 +2410,13 @@ Returns the Steem account data for :account.
 ```ts
 interface AccountsGetAccountArgs {
   account: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values)
+  fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[];  // fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values)
 }
 
 getAccount<T = SDSJsonObject>(args: AccountsGetAccountArgs, callback: Callback<T>): Promise<void>;
 getAccount<T = SDSJsonObject>(args: AccountsGetAccountArgs): Promise<T>;
-getAccount<T = SDSJsonObject>(account: string, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getAccount<T = SDSJsonObject>(account: string, fields?: string | string[]): Promise<T>;
+getAccount<T = SDSJsonObject>(account: string, fields: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getAccount<T = SDSJsonObject>(account: string, fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -2458,13 +2458,13 @@ Returns the Steem account data for :accounts.
 ```ts
 interface AccountsGetAccountsArgs {
   accounts: string | string[];  // account_name_csv
-  fields?: string | string[];  // fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values)
+  fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[];  // fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values)
 }
 
 getAccounts<T = SDSJsonObject>(args: AccountsGetAccountsArgs, callback: Callback<T>): Promise<void>;
 getAccounts<T = SDSJsonObject>(args: AccountsGetAccountsArgs): Promise<T>;
-getAccounts<T = SDSJsonObject>(accounts: string | string[], fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getAccounts<T = SDSJsonObject>(accounts: string | string[], fields?: string | string[]): Promise<T>;
+getAccounts<T = SDSJsonObject>(accounts: string | string[], fields: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getAccounts<T = SDSJsonObject>(accounts: string | string[], fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -2507,13 +2507,13 @@ Returns the extended Steem account data for :account.
 interface AccountsGetAccountExtArgs {
   account: string;  // account_name
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
 }
 
 getAccountExt<T = SDSJsonObject>(args: AccountsGetAccountExtArgs, callback: Callback<T>): Promise<void>;
 getAccountExt<T = SDSJsonObject>(args: AccountsGetAccountExtArgs): Promise<T>;
-getAccountExt<T = SDSJsonObject>(account: string, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getAccountExt<T = SDSJsonObject>(account: string, observer?: string, fields?: string | string[]): Promise<T>;
+getAccountExt<T = SDSJsonObject>(account: string, observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, callback: Callback<T>): Promise<void>;
+getAccountExt<T = SDSJsonObject>(account: string, observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[]): Promise<T>;
 ```
 
 **Examples**
@@ -2557,13 +2557,13 @@ Returns the extended Steem account data for :accounts.
 interface AccountsGetAccountsExtArgs {
   accounts: string | string[];  // account_name_csv
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
 }
 
 getAccountsExt<T = SDSJsonObject>(args: AccountsGetAccountsExtArgs, callback: Callback<T>): Promise<void>;
 getAccountsExt<T = SDSJsonObject>(args: AccountsGetAccountsExtArgs): Promise<T>;
-getAccountsExt<T = SDSJsonObject>(accounts: string | string[], observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getAccountsExt<T = SDSJsonObject>(accounts: string | string[], observer?: string, fields?: string | string[]): Promise<T>;
+getAccountsExt<T = SDSJsonObject>(accounts: string | string[], observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, callback: Callback<T>): Promise<void>;
+getAccountsExt<T = SDSJsonObject>(accounts: string | string[], observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[]): Promise<T>;
 ```
 
 **Examples**
@@ -2649,13 +2649,13 @@ Returns the Steem account data for :accountId.
 ```ts
 interface AccountsGetAccountByIdArgs {
   accountId: number;  // int · min 1
-  fields?: string | string[];  // fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values)
+  fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[];  // fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values)
 }
 
 getAccountById<T = SDSJsonObject>(args: AccountsGetAccountByIdArgs, callback: Callback<T>): Promise<void>;
 getAccountById<T = SDSJsonObject>(args: AccountsGetAccountByIdArgs): Promise<T>;
-getAccountById<T = SDSJsonObject>(accountId: number, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getAccountById<T = SDSJsonObject>(accountId: number, fields?: string | string[]): Promise<T>;
+getAccountById<T = SDSJsonObject>(accountId: number, fields: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getAccountById<T = SDSJsonObject>(accountId: number, fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -2697,13 +2697,13 @@ Returns the Steem account data for :accountIds.
 ```ts
 interface AccountsGetAccountsByIdArgs {
   accountIds: string | number | Array<string | number>;  // int_csv
-  fields?: string | string[];  // fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values)
+  fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[];  // fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values)
 }
 
 getAccountsById<T = SDSJsonObject>(args: AccountsGetAccountsByIdArgs, callback: Callback<T>): Promise<void>;
 getAccountsById<T = SDSJsonObject>(args: AccountsGetAccountsByIdArgs): Promise<T>;
-getAccountsById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getAccountsById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, fields?: string | string[]): Promise<T>;
+getAccountsById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, fields: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getAccountsById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -2746,13 +2746,13 @@ Returns the extended Steem account data for :accountId.
 interface AccountsGetAccountExtByIdArgs {
   accountId: number;  // int · min 1
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
 }
 
 getAccountExtById<T = SDSJsonObject>(args: AccountsGetAccountExtByIdArgs, callback: Callback<T>): Promise<void>;
 getAccountExtById<T = SDSJsonObject>(args: AccountsGetAccountExtByIdArgs): Promise<T>;
-getAccountExtById<T = SDSJsonObject>(accountId: number, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getAccountExtById<T = SDSJsonObject>(accountId: number, observer?: string, fields?: string | string[]): Promise<T>;
+getAccountExtById<T = SDSJsonObject>(accountId: number, observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, callback: Callback<T>): Promise<void>;
+getAccountExtById<T = SDSJsonObject>(accountId: number, observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[]): Promise<T>;
 ```
 
 **Examples**
@@ -2796,13 +2796,13 @@ Returns the extended Steem account data for :accountIds.
 interface AccountsGetAccountsExtByIdArgs {
   accountIds: string | number | Array<string | number>;  // int_csv
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
 }
 
 getAccountsExtById<T = SDSJsonObject>(args: AccountsGetAccountsExtByIdArgs, callback: Callback<T>): Promise<void>;
 getAccountsExtById<T = SDSJsonObject>(args: AccountsGetAccountsExtByIdArgs): Promise<T>;
-getAccountsExtById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getAccountsExtById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, observer?: string, fields?: string | string[]): Promise<T>;
+getAccountsExtById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, callback: Callback<T>): Promise<void>;
+getAccountsExtById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[]): Promise<T>;
 ```
 
 **Examples**
@@ -2893,15 +2893,15 @@ Returns the extended Steem account data for accounts whose name starts with :pre
 interface AccountsGetAccountsByPrefixArgs {
   prefix: string;  // string
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
   limit?: number;  // int · default `100` · 1…250
   offset?: number;  // int · default `0` · min 0
 }
 
 getAccountsByPrefix<T = SDSJsonObject>(args: AccountsGetAccountsByPrefixArgs, callback: Callback<T>): Promise<void>;
 getAccountsByPrefix<T = SDSJsonObject>(args: AccountsGetAccountsByPrefixArgs): Promise<T>;
-getAccountsByPrefix<T = SDSJsonObject>(prefix: string, observer: string | undefined, fields: string | string[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
-getAccountsByPrefix<T = SDSJsonObject>(prefix: string, observer?: string, fields?: string | string[], limit?: number, offset?: number): Promise<T>;
+getAccountsByPrefix<T = SDSJsonObject>(prefix: string, observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
+getAccountsByPrefix<T = SDSJsonObject>(prefix: string, observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[], limit?: number, offset?: number): Promise<T>;
 ```
 
 **Examples**
@@ -2949,15 +2949,15 @@ interface AccountsGetAccountsSortedByArgs {
   sortField: "name" | "creator" | "proxy" | "recovery_account" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "count_root_posts" | "count_comments" | "count_replies" | "count_active_posts" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "savings_steem" | "savings_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "vests_own" | "vests_in" | "vests_out" | "vests" | "powerdown" | "powerdown_done" | "next_powerdown" | "powerdown_rate";  // fixed_value · one of: name | creator | proxy | recovery_account | … (42 values)
   sortDir: "ASC" | "DESC";  // fixed_value · one of: ASC | DESC
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];  // fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values)
   limit?: number;  // int · default `250` · 1…1000
   offset?: number;  // int · default `0` · min 0
 }
 
 getAccountsSortedBy<T = SDSJsonObject>(args: AccountsGetAccountsSortedByArgs, callback: Callback<T>): Promise<void>;
 getAccountsSortedBy<T = SDSJsonObject>(args: AccountsGetAccountsSortedByArgs): Promise<T>;
-getAccountsSortedBy<T = SDSJsonObject>(sortField: "name" | "creator" | "proxy" | "recovery_account" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "count_root_posts" | "count_comments" | "count_replies" | "count_active_posts" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "savings_steem" | "savings_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "vests_own" | "vests_in" | "vests_out" | "vests" | "powerdown" | "powerdown_done" | "next_powerdown" | "powerdown_rate", sortDir: "ASC" | "DESC", observer: string | undefined, fields: string | string[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
-getAccountsSortedBy<T = SDSJsonObject>(sortField: "name" | "creator" | "proxy" | "recovery_account" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "count_root_posts" | "count_comments" | "count_replies" | "count_active_posts" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "savings_steem" | "savings_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "vests_own" | "vests_in" | "vests_out" | "vests" | "powerdown" | "powerdown_done" | "next_powerdown" | "powerdown_rate", sortDir: "ASC" | "DESC", observer?: string, fields?: string | string[], limit?: number, offset?: number): Promise<T>;
+getAccountsSortedBy<T = SDSJsonObject>(sortField: "name" | "creator" | "proxy" | "recovery_account" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "count_root_posts" | "count_comments" | "count_replies" | "count_active_posts" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "savings_steem" | "savings_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "vests_own" | "vests_in" | "vests_out" | "vests" | "powerdown" | "powerdown_done" | "next_powerdown" | "powerdown_rate", sortDir: "ASC" | "DESC", observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
+getAccountsSortedBy<T = SDSJsonObject>(sortField: "name" | "creator" | "proxy" | "recovery_account" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "count_root_posts" | "count_comments" | "count_replies" | "count_active_posts" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "savings_steem" | "savings_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "vests_own" | "vests_in" | "vests_out" | "vests" | "powerdown" | "powerdown_done" | "next_powerdown" | "powerdown_rate", sortDir: "ASC" | "DESC", observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[], limit?: number, offset?: number): Promise<T>;
 ```
 
 **Examples**
@@ -3181,7 +3181,7 @@ Returns the account history for :account and :opTypes in the given time range. *
 ```ts
 interface AccountHistoryGetHistoryByOpTypesTimeArgs {
   account: string;  // account_name
-  opTypes: string | string[];  // fixed_csv · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
+  opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];  // fixed_csv · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values)
   fromTime: number | string | Date;  // int · timestamp — accepts `Date`, date string or unix seconds (12+ digit numbers are read as ms)
   toTime: number | string | Date;  // int · timestamp — accepts `Date`, date string or unix seconds (12+ digit numbers are read as ms)
   limit?: number;  // int · default `1000` · 1…10000
@@ -3190,8 +3190,8 @@ interface AccountHistoryGetHistoryByOpTypesTimeArgs {
 
 getHistoryByOpTypesTime<T = SDSJsonObject>(args: AccountHistoryGetHistoryByOpTypesTimeArgs, callback: Callback<T>): Promise<void>;
 getHistoryByOpTypesTime<T = SDSJsonObject>(args: AccountHistoryGetHistoryByOpTypesTimeArgs): Promise<T>;
-getHistoryByOpTypesTime<T = SDSJsonObject>(account: string, opTypes: string | string[], fromTime: number | string | Date, toTime: number | string | Date, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
-getHistoryByOpTypesTime<T = SDSJsonObject>(account: string, opTypes: string | string[], fromTime: number | string | Date, toTime: number | string | Date, limit?: number, offset?: number): Promise<T>;
+getHistoryByOpTypesTime<T = SDSJsonObject>(account: string, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[], fromTime: number | string | Date, toTime: number | string | Date, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
+getHistoryByOpTypesTime<T = SDSJsonObject>(account: string, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[], fromTime: number | string | Date, toTime: number | string | Date, limit?: number, offset?: number): Promise<T>;
 ```
 
 **Examples**
@@ -13209,13 +13209,13 @@ interface PostsGetPostArgs {
   permlink: string;  // string
   withVotes?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
 }
 
 getPost<T = SDSJsonObject>(args: PostsGetPostArgs, callback: Callback<T>): Promise<void>;
 getPost<T = SDSJsonObject>(args: PostsGetPostArgs): Promise<T>;
-getPost<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getPost<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+getPost<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getPost<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -13262,13 +13262,13 @@ interface PostsGetPostRepliesArgs {
   permlink: string;  // string
   withVotes?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
 }
 
 getPostReplies<T = SDSJsonObject>(args: PostsGetPostRepliesArgs, callback: Callback<T>): Promise<void>;
 getPostReplies<T = SDSJsonObject>(args: PostsGetPostRepliesArgs): Promise<T>;
-getPostReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getPostReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+getPostReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getPostReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -13315,13 +13315,13 @@ interface PostsGetPostWithRepliesArgs {
   permlink: string;  // string
   withVotes?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
 }
 
 getPostWithReplies<T = SDSJsonObject>(args: PostsGetPostWithRepliesArgs, callback: Callback<T>): Promise<void>;
 getPostWithReplies<T = SDSJsonObject>(args: PostsGetPostWithRepliesArgs): Promise<T>;
-getPostWithReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getPostWithReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+getPostWithReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getPostWithReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -13511,13 +13511,13 @@ interface PostsGetPostByIdArgs {
   linkId: number;  // int · min 1
   withVotes?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
 }
 
 getPostById<T = SDSJsonObject>(args: PostsGetPostByIdArgs, callback: Callback<T>): Promise<void>;
 getPostById<T = SDSJsonObject>(args: PostsGetPostByIdArgs): Promise<T>;
-getPostById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getPostById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+getPostById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getPostById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -13562,13 +13562,13 @@ interface PostsGetPostRepliesByIdArgs {
   linkId: number;  // int · min 1
   withVotes?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
 }
 
 getPostRepliesById<T = SDSJsonObject>(args: PostsGetPostRepliesByIdArgs, callback: Callback<T>): Promise<void>;
 getPostRepliesById<T = SDSJsonObject>(args: PostsGetPostRepliesByIdArgs): Promise<T>;
-getPostRepliesById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getPostRepliesById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+getPostRepliesById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getPostRepliesById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -13613,13 +13613,13 @@ interface PostsGetPostWithRepliesByIdArgs {
   linkId: number;  // int · min 1
   withVotes?: boolean;  // bool · default `true` · one of: true | false | 1 | 0
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
 }
 
 getPostWithRepliesById<T = SDSJsonObject>(args: PostsGetPostWithRepliesByIdArgs, callback: Callback<T>): Promise<void>;
 getPostWithRepliesById<T = SDSJsonObject>(args: PostsGetPostWithRepliesByIdArgs): Promise<T>;
-getPostWithRepliesById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-getPostWithRepliesById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+getPostWithRepliesById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+getPostWithRepliesById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 ```
 
 **Examples**
@@ -13806,15 +13806,15 @@ interface PostsGetRootPostsByAuthorArgs {
   author: string;  // account_name
   withVotes?: boolean;  // bool · default `false` · one of: true | false | 1 | 0
   observer?: string;  // account_name
-  fields?: string | string[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];  // fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values)
   limit?: number;  // int · default `10` · 1…100
   offset?: number;  // int · default `0` · min 0
 }
 
 getRootPostsByAuthor<T = SDSJsonObject>(args: PostsGetRootPostsByAuthorArgs, callback: Callback<T>): Promise<void>;
 getRootPostsByAuthor<T = SDSJsonObject>(args: PostsGetRootPostsByAuthorArgs): Promise<T>;
-getRootPostsByAuthor<T = SDSJsonObject>(author: string, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
-getRootPostsByAuthor<T = SDSJsonObject>(author: string, withVotes?: boolean, observer?: string, fields?: string | string[], limit?: number, offset?: number): Promise<T>;
+getRootPostsByAuthor<T = SDSJsonObject>(author: string, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
+getRootPostsByAuthor<T = SDSJsonObject>(author: string, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[], limit?: number, offset?: number): Promise<T>;
 ```
 
 **Examples**

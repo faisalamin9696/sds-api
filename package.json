@@ -1,6 +1,6 @@
 {
   "name": "@steempro/sds-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Typed JavaScript / TypeScript client for the Steem Blockchain Data Services (SDS) REST API — every module and method of sds0.steemworld.org, promise + callback support, custom SDS instances, retries and structured error handling.",
   "keywords": [
     "steem",

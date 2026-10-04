@@ -67,7 +67,7 @@ export interface BlocksGetOpsInBlockArgs {
   /** bool · default `true` · one of: true | false | 1 | 0 */
   withVirtualOps?: boolean;
   /** fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values) */
-  opTypes?: string | string[];
+  opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];
 }
 
 /** Object style arguments of `blocks_api.getOpsInBlockRange`. */
@@ -79,7 +79,7 @@ export interface BlocksGetOpsInBlockRangeArgs {
   /** bool · default `true` · one of: true | false | 1 | 0 */
   withVirtualOps?: boolean;
   /** fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values) */
-  opTypes?: string | string[];
+  opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];
 }
 
 /** Object style arguments of `blocks_api.getOpsInBlockRangeAsArray`. */
@@ -91,7 +91,7 @@ export interface BlocksGetOpsInBlockRangeAsArrayArgs {
   /** bool · default `true` · one of: true | false | 1 | 0 */
   withVirtualOps?: boolean;
   /** fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values) */
-  opTypes?: string | string[];
+  opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];
 }
 
 /** Object style arguments of `blocks_api.getOpsInBlockRangeGrouped`. */
@@ -103,7 +103,7 @@ export interface BlocksGetOpsInBlockRangeGroupedArgs {
   /** bool · default `true` · one of: true | false | 1 | 0 */
   withVirtualOps?: boolean;
   /** fixed_csv · default `*` · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values) */
-  opTypes?: string | string[];
+  opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];
 }
 
 /** Object style arguments of `blocks_api.getVirtualOpsInBlock`. */
@@ -244,8 +244,8 @@ export interface BlocksApi {
   getOpsInBlock<T = SDSJsonArray>(args: BlocksGetOpsInBlockArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getOpsInBlock<T = SDSJsonArray>(args: BlocksGetOpsInBlockArgs): Promise<T>;
-  getOpsInBlock<T = SDSJsonArray>(blockNum: number, withVirtualOps: boolean | undefined, opTypes: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getOpsInBlock<T = SDSJsonArray>(blockNum: number, withVirtualOps?: boolean, opTypes?: string | string[]): Promise<T>;
+  getOpsInBlock<T = SDSJsonArray>(blockNum: number, withVirtualOps: boolean | undefined, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getOpsInBlock<T = SDSJsonArray>(blockNum: number, withVirtualOps?: boolean, opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[]): Promise<T>;
 
   /**
    * Returns an array (one element per block) with all operations for the given block range (:fromBlockNum to :toBlockNum).
@@ -265,8 +265,8 @@ export interface BlocksApi {
   getOpsInBlockRange<T = SDSJsonArray>(args: BlocksGetOpsInBlockRangeArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getOpsInBlockRange<T = SDSJsonArray>(args: BlocksGetOpsInBlockRangeArgs): Promise<T>;
-  getOpsInBlockRange<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getOpsInBlockRange<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: string | string[]): Promise<T>;
+  getOpsInBlockRange<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getOpsInBlockRange<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[]): Promise<T>;
 
   /**
    * Returns an array including all operations for the given block range (:fromBlockNum to :toBlockNum).
@@ -286,8 +286,8 @@ export interface BlocksApi {
   getOpsInBlockRangeAsArray<T = SDSJsonArray>(args: BlocksGetOpsInBlockRangeAsArrayArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getOpsInBlockRangeAsArray<T = SDSJsonArray>(args: BlocksGetOpsInBlockRangeAsArrayArgs): Promise<T>;
-  getOpsInBlockRangeAsArray<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getOpsInBlockRangeAsArray<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: string | string[]): Promise<T>;
+  getOpsInBlockRangeAsArray<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getOpsInBlockRangeAsArray<T = SDSJsonArray>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[]): Promise<T>;
 
   /**
    * Returns an object including all operations for the given block range (:fromBlockNum to :toBlockNum) grouped by type.
@@ -307,8 +307,8 @@ export interface BlocksApi {
   getOpsInBlockRangeGrouped<T = SDSJsonObject>(args: BlocksGetOpsInBlockRangeGroupedArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getOpsInBlockRangeGrouped<T = SDSJsonObject>(args: BlocksGetOpsInBlockRangeGroupedArgs): Promise<T>;
-  getOpsInBlockRangeGrouped<T = SDSJsonObject>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getOpsInBlockRangeGrouped<T = SDSJsonObject>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: string | string[]): Promise<T>;
+  getOpsInBlockRangeGrouped<T = SDSJsonObject>(fromBlockNum: number, toBlockNum: number, withVirtualOps: boolean | undefined, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getOpsInBlockRangeGrouped<T = SDSJsonObject>(fromBlockNum: number, toBlockNum: number, withVirtualOps?: boolean, opTypes?: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[]): Promise<T>;
 
   /**
    * Returns all virtual operations for the given :blockNum.
@@ -571,7 +571,7 @@ export interface ChainApi {
 /** Object style arguments of `steem_requests_api.getById`. */
 export interface SteemRequestsGetByIdArgs {
   /** fixed_csv · one of: 1 | 2 | 3 | 4 | … (9 values) */
-  ids: string | string[];
+  ids: SteemRequestsApiIdsCsv | `${SteemRequestsApiIdsCsv},${string}` | SteemRequestsApiIdsCsv[];
 }
 
 /** Object style arguments of `steem_requests_api.condenser_api.get_reward_fund`. */
@@ -637,8 +637,8 @@ export interface SteemRequestsApi {
   getById<T = SDSJsonObject>(args: SteemRequestsGetByIdArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getById<T = SDSJsonObject>(args: SteemRequestsGetByIdArgs): Promise<T>;
-  getById<T = SDSJsonObject>(ids: string | string[], callback: Callback<T>): Promise<void>;
-  getById<T = SDSJsonObject>(ids: string | string[]): Promise<T>;
+  getById<T = SDSJsonObject>(ids: SteemRequestsApiIdsCsv | `${SteemRequestsApiIdsCsv},${string}` | SteemRequestsApiIdsCsv[], callback: Callback<T>): Promise<void>;
+  getById<T = SDSJsonObject>(ids: SteemRequestsApiIdsCsv | `${SteemRequestsApiIdsCsv},${string}` | SteemRequestsApiIdsCsv[]): Promise<T>;
 
   /**
    * See: developers.steem.io/apidefinitions/#condenser_api.get_account_count
@@ -850,7 +850,7 @@ export interface AccountsGetAccountArgs {
   /** account_name */
   account: string;
   /** fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[];
 }
 
 /** Object style arguments of `accounts_api.getAccounts`. */
@@ -858,7 +858,7 @@ export interface AccountsGetAccountsArgs {
   /** account_name_csv */
   accounts: string | string[];
   /** fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[];
 }
 
 /** Object style arguments of `accounts_api.getAccountExt`. */
@@ -868,7 +868,7 @@ export interface AccountsGetAccountExtArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];
 }
 
 /** Object style arguments of `accounts_api.getAccountsExt`. */
@@ -878,7 +878,7 @@ export interface AccountsGetAccountsExtArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];
 }
 
 /** Object style arguments of `accounts_api.getVestingWithdrawRoutes`. */
@@ -892,7 +892,7 @@ export interface AccountsGetAccountByIdArgs {
   /** int · min 1 */
   accountId: number;
   /** fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[];
 }
 
 /** Object style arguments of `accounts_api.getAccountsById`. */
@@ -900,7 +900,7 @@ export interface AccountsGetAccountsByIdArgs {
   /** int_csv */
   accountIds: string | number | Array<string | number>;
   /** fixed_csv · default `*` · one of: name | recovery_account | reset_account | proxy | … (56 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[];
 }
 
 /** Object style arguments of `accounts_api.getAccountExtById`. */
@@ -910,7 +910,7 @@ export interface AccountsGetAccountExtByIdArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];
 }
 
 /** Object style arguments of `accounts_api.getAccountsExtById`. */
@@ -920,7 +920,7 @@ export interface AccountsGetAccountsExtByIdArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];
 }
 
 /** Object style arguments of `accounts_api.getVestingWithdrawRoutesById`. */
@@ -936,7 +936,7 @@ export interface AccountsGetAccountsByPrefixArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];
   /** int · default `100` · 1…250 */
   limit?: number;
   /** int · default `0` · min 0 */
@@ -952,7 +952,7 @@ export interface AccountsGetAccountsSortedByArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: id | name | creator | recovery_account | … (84 values) */
-  fields?: string | string[];
+  fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[];
   /** int · default `250` · 1…1000 */
   limit?: number;
   /** int · default `0` · min 0 */
@@ -997,8 +997,8 @@ export interface AccountsApi {
   getAccount<T = SDSJsonObject>(args: AccountsGetAccountArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccount<T = SDSJsonObject>(args: AccountsGetAccountArgs): Promise<T>;
-  getAccount<T = SDSJsonObject>(account: string, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getAccount<T = SDSJsonObject>(account: string, fields?: string | string[]): Promise<T>;
+  getAccount<T = SDSJsonObject>(account: string, fields: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getAccount<T = SDSJsonObject>(account: string, fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns the Steem account data for :accounts.
@@ -1015,8 +1015,8 @@ export interface AccountsApi {
   getAccounts<T = SDSJsonObject>(args: AccountsGetAccountsArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccounts<T = SDSJsonObject>(args: AccountsGetAccountsArgs): Promise<T>;
-  getAccounts<T = SDSJsonObject>(accounts: string | string[], fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getAccounts<T = SDSJsonObject>(accounts: string | string[], fields?: string | string[]): Promise<T>;
+  getAccounts<T = SDSJsonObject>(accounts: string | string[], fields: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getAccounts<T = SDSJsonObject>(accounts: string | string[], fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns the extended Steem account data for :account.
@@ -1034,8 +1034,8 @@ export interface AccountsApi {
   getAccountExt<T = SDSJsonObject>(args: AccountsGetAccountExtArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccountExt<T = SDSJsonObject>(args: AccountsGetAccountExtArgs): Promise<T>;
-  getAccountExt<T = SDSJsonObject>(account: string, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getAccountExt<T = SDSJsonObject>(account: string, observer?: string, fields?: string | string[]): Promise<T>;
+  getAccountExt<T = SDSJsonObject>(account: string, observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, callback: Callback<T>): Promise<void>;
+  getAccountExt<T = SDSJsonObject>(account: string, observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[]): Promise<T>;
 
   /**
    * Returns the extended Steem account data for :accounts.
@@ -1053,8 +1053,8 @@ export interface AccountsApi {
   getAccountsExt<T = SDSJsonObject>(args: AccountsGetAccountsExtArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccountsExt<T = SDSJsonObject>(args: AccountsGetAccountsExtArgs): Promise<T>;
-  getAccountsExt<T = SDSJsonObject>(accounts: string | string[], observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getAccountsExt<T = SDSJsonObject>(accounts: string | string[], observer?: string, fields?: string | string[]): Promise<T>;
+  getAccountsExt<T = SDSJsonObject>(accounts: string | string[], observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, callback: Callback<T>): Promise<void>;
+  getAccountsExt<T = SDSJsonObject>(accounts: string | string[], observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[]): Promise<T>;
 
   /**
    * Returns the installed vesting withdraw routes for :account.
@@ -1088,8 +1088,8 @@ export interface AccountsApi {
   getAccountById<T = SDSJsonObject>(args: AccountsGetAccountByIdArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccountById<T = SDSJsonObject>(args: AccountsGetAccountByIdArgs): Promise<T>;
-  getAccountById<T = SDSJsonObject>(accountId: number, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getAccountById<T = SDSJsonObject>(accountId: number, fields?: string | string[]): Promise<T>;
+  getAccountById<T = SDSJsonObject>(accountId: number, fields: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getAccountById<T = SDSJsonObject>(accountId: number, fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns the Steem account data for :accountIds.
@@ -1106,8 +1106,8 @@ export interface AccountsApi {
   getAccountsById<T = SDSJsonObject>(args: AccountsGetAccountsByIdArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccountsById<T = SDSJsonObject>(args: AccountsGetAccountsByIdArgs): Promise<T>;
-  getAccountsById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getAccountsById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, fields?: string | string[]): Promise<T>;
+  getAccountsById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, fields: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getAccountsById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, fields?: AccountsApiFieldsCsv | `${AccountsApiFieldsCsv},${string}` | AccountsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns the extended Steem account data for :accountId.
@@ -1125,8 +1125,8 @@ export interface AccountsApi {
   getAccountExtById<T = SDSJsonObject>(args: AccountsGetAccountExtByIdArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccountExtById<T = SDSJsonObject>(args: AccountsGetAccountExtByIdArgs): Promise<T>;
-  getAccountExtById<T = SDSJsonObject>(accountId: number, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getAccountExtById<T = SDSJsonObject>(accountId: number, observer?: string, fields?: string | string[]): Promise<T>;
+  getAccountExtById<T = SDSJsonObject>(accountId: number, observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, callback: Callback<T>): Promise<void>;
+  getAccountExtById<T = SDSJsonObject>(accountId: number, observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[]): Promise<T>;
 
   /**
    * Returns the extended Steem account data for :accountIds.
@@ -1144,8 +1144,8 @@ export interface AccountsApi {
   getAccountsExtById<T = SDSJsonObject>(args: AccountsGetAccountsExtByIdArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccountsExtById<T = SDSJsonObject>(args: AccountsGetAccountsExtByIdArgs): Promise<T>;
-  getAccountsExtById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getAccountsExtById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, observer?: string, fields?: string | string[]): Promise<T>;
+  getAccountsExtById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, callback: Callback<T>): Promise<void>;
+  getAccountsExtById<T = SDSJsonObject>(accountIds: string | number | Array<string | number>, observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[]): Promise<T>;
 
   /**
    * Returns the installed vesting withdraw routes for :accountId.
@@ -1182,8 +1182,8 @@ export interface AccountsApi {
   getAccountsByPrefix<T = SDSJsonObject>(args: AccountsGetAccountsByPrefixArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccountsByPrefix<T = SDSJsonObject>(args: AccountsGetAccountsByPrefixArgs): Promise<T>;
-  getAccountsByPrefix<T = SDSJsonObject>(prefix: string, observer: string | undefined, fields: string | string[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
-  getAccountsByPrefix<T = SDSJsonObject>(prefix: string, observer?: string, fields?: string | string[], limit?: number, offset?: number): Promise<T>;
+  getAccountsByPrefix<T = SDSJsonObject>(prefix: string, observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
+  getAccountsByPrefix<T = SDSJsonObject>(prefix: string, observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[], limit?: number, offset?: number): Promise<T>;
 
   /**
    * Returns the extended Steem account data for all accounts ordered by :sortField, :sortDir.
@@ -1204,8 +1204,8 @@ export interface AccountsApi {
   getAccountsSortedBy<T = SDSJsonObject>(args: AccountsGetAccountsSortedByArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getAccountsSortedBy<T = SDSJsonObject>(args: AccountsGetAccountsSortedByArgs): Promise<T>;
-  getAccountsSortedBy<T = SDSJsonObject>(sortField: "name" | "creator" | "proxy" | "recovery_account" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "count_root_posts" | "count_comments" | "count_replies" | "count_active_posts" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "savings_steem" | "savings_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "vests_own" | "vests_in" | "vests_out" | "vests" | "powerdown" | "powerdown_done" | "next_powerdown" | "powerdown_rate", sortDir: "ASC" | "DESC", observer: string | undefined, fields: string | string[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
-  getAccountsSortedBy<T = SDSJsonObject>(sortField: "name" | "creator" | "proxy" | "recovery_account" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "count_root_posts" | "count_comments" | "count_replies" | "count_active_posts" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "savings_steem" | "savings_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "vests_own" | "vests_in" | "vests_out" | "vests" | "powerdown" | "powerdown_done" | "next_powerdown" | "powerdown_rate", sortDir: "ASC" | "DESC", observer?: string, fields?: string | string[], limit?: number, offset?: number): Promise<T>;
+  getAccountsSortedBy<T = SDSJsonObject>(sortField: "name" | "creator" | "proxy" | "recovery_account" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "count_root_posts" | "count_comments" | "count_replies" | "count_active_posts" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "savings_steem" | "savings_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "vests_own" | "vests_in" | "vests_out" | "vests" | "powerdown" | "powerdown_done" | "next_powerdown" | "powerdown_rate", sortDir: "ASC" | "DESC", observer: string | undefined, fields: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
+  getAccountsSortedBy<T = SDSJsonObject>(sortField: "name" | "creator" | "proxy" | "recovery_account" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "count_root_posts" | "count_comments" | "count_replies" | "count_active_posts" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "savings_steem" | "savings_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "vests_own" | "vests_in" | "vests_out" | "vests" | "powerdown" | "powerdown_done" | "next_powerdown" | "powerdown_rate", sortDir: "ASC" | "DESC", observer?: string, fields?: AccountsApiFieldsCsv2 | `${AccountsApiFieldsCsv2},${string}` | AccountsApiFieldsCsv2[], limit?: number, offset?: number): Promise<T>;
 
   /**
    * Returns the number of accounts that :type between :fromVESTS and :toVESTS vesting shares.
@@ -1258,7 +1258,7 @@ export interface AccountHistoryGetHistoryByOpTypesTimeArgs {
   /** account_name */
   account: string;
   /** fixed_csv · one of: account_create | account_create_with_delegation | account_update | account_update2 | … (59 values) */
-  opTypes: string | string[];
+  opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[];
   /** int · timestamp — accepts `Date`, date string or unix seconds (12+ digit numbers are read as ms) */
   fromTime: number | string | Date;
   /** int · timestamp — accepts `Date`, date string or unix seconds (12+ digit numbers are read as ms) */
@@ -1348,8 +1348,8 @@ export interface AccountHistoryApi {
   getHistoryByOpTypesTime<T = SDSJsonObject>(args: AccountHistoryGetHistoryByOpTypesTimeArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getHistoryByOpTypesTime<T = SDSJsonObject>(args: AccountHistoryGetHistoryByOpTypesTimeArgs): Promise<T>;
-  getHistoryByOpTypesTime<T = SDSJsonObject>(account: string, opTypes: string | string[], fromTime: number | string | Date, toTime: number | string | Date, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
-  getHistoryByOpTypesTime<T = SDSJsonObject>(account: string, opTypes: string | string[], fromTime: number | string | Date, toTime: number | string | Date, limit?: number, offset?: number): Promise<T>;
+  getHistoryByOpTypesTime<T = SDSJsonObject>(account: string, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[], fromTime: number | string | Date, toTime: number | string | Date, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
+  getHistoryByOpTypesTime<T = SDSJsonObject>(account: string, opTypes: BlocksApiOpTypesCsv | `${BlocksApiOpTypesCsv},${string}` | BlocksApiOpTypesCsv[], fromTime: number | string | Date, toTime: number | string | Date, limit?: number, offset?: number): Promise<T>;
 
   /**
    * Returns the account history for :account starting from :startId.
@@ -7585,7 +7585,7 @@ export interface PostsGetPostArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values) */
-  fields?: string | string[];
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];
 }
 
 /** Object style arguments of `posts_api.getPostReplies`. */
@@ -7599,7 +7599,7 @@ export interface PostsGetPostRepliesArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values) */
-  fields?: string | string[];
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];
 }
 
 /** Object style arguments of `posts_api.getPostWithReplies`. */
@@ -7613,7 +7613,7 @@ export interface PostsGetPostWithRepliesArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values) */
-  fields?: string | string[];
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];
 }
 
 /** Object style arguments of `posts_api.getBeneficiaries`. */
@@ -7653,7 +7653,7 @@ export interface PostsGetPostByIdArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values) */
-  fields?: string | string[];
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];
 }
 
 /** Object style arguments of `posts_api.getPostRepliesById`. */
@@ -7665,7 +7665,7 @@ export interface PostsGetPostRepliesByIdArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values) */
-  fields?: string | string[];
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];
 }
 
 /** Object style arguments of `posts_api.getPostWithRepliesById`. */
@@ -7677,7 +7677,7 @@ export interface PostsGetPostWithRepliesByIdArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values) */
-  fields?: string | string[];
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];
 }
 
 /** Object style arguments of `posts_api.getBeneficiariesById`. */
@@ -7711,7 +7711,7 @@ export interface PostsGetRootPostsByAuthorArgs {
   /** account_name */
   observer?: string;
   /** fixed_csv · default `*` · one of: link_id | link_status | author_reputation | author_status | … (53 values) */
-  fields?: string | string[];
+  fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[];
   /** int · default `10` · 1…100 */
   limit?: number;
   /** int · default `0` · min 0 */
@@ -7749,8 +7749,8 @@ export interface PostsApi {
   getPost<T = SDSJsonObject>(args: PostsGetPostArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getPost<T = SDSJsonObject>(args: PostsGetPostArgs): Promise<T>;
-  getPost<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getPost<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+  getPost<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getPost<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns all replies of the post with the given :author / :permlink.
@@ -7770,8 +7770,8 @@ export interface PostsApi {
   getPostReplies<T = SDSJsonObject>(args: PostsGetPostRepliesArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getPostReplies<T = SDSJsonObject>(args: PostsGetPostRepliesArgs): Promise<T>;
-  getPostReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getPostReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+  getPostReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getPostReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns the data and all replies of the post with the given :author / :permlink.
@@ -7791,8 +7791,8 @@ export interface PostsApi {
   getPostWithReplies<T = SDSJsonObject>(args: PostsGetPostWithRepliesArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getPostWithReplies<T = SDSJsonObject>(args: PostsGetPostWithRepliesArgs): Promise<T>;
-  getPostWithReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getPostWithReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+  getPostWithReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getPostWithReplies<T = SDSJsonObject>(author: string, permlink: string, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns all beneficiaries of the post with the given :author / :permlink.
@@ -7867,8 +7867,8 @@ export interface PostsApi {
   getPostById<T = SDSJsonObject>(args: PostsGetPostByIdArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getPostById<T = SDSJsonObject>(args: PostsGetPostByIdArgs): Promise<T>;
-  getPostById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getPostById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+  getPostById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getPostById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns all replies of the post with the given :linkId.
@@ -7887,8 +7887,8 @@ export interface PostsApi {
   getPostRepliesById<T = SDSJsonObject>(args: PostsGetPostRepliesByIdArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getPostRepliesById<T = SDSJsonObject>(args: PostsGetPostRepliesByIdArgs): Promise<T>;
-  getPostRepliesById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getPostRepliesById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+  getPostRepliesById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getPostRepliesById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns the data and all replies of the post with the given :linkId.
@@ -7907,8 +7907,8 @@ export interface PostsApi {
   getPostWithRepliesById<T = SDSJsonObject>(args: PostsGetPostWithRepliesByIdArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getPostWithRepliesById<T = SDSJsonObject>(args: PostsGetPostWithRepliesByIdArgs): Promise<T>;
-  getPostWithRepliesById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, callback: Callback<T>): Promise<void>;
-  getPostWithRepliesById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: string | string[]): Promise<T>;
+  getPostWithRepliesById<T = SDSJsonObject>(linkId: number, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, callback: Callback<T>): Promise<void>;
+  getPostWithRepliesById<T = SDSJsonObject>(linkId: number, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[]): Promise<T>;
 
   /**
    * Returns all beneficiaries of the post with the given :linkId.
@@ -7982,8 +7982,8 @@ export interface PostsApi {
   getRootPostsByAuthor<T = SDSJsonObject>(args: PostsGetRootPostsByAuthorArgs, callback: Callback<T>): Promise<void>;
   /** Object style, promise. */
   getRootPostsByAuthor<T = SDSJsonObject>(args: PostsGetRootPostsByAuthorArgs): Promise<T>;
-  getRootPostsByAuthor<T = SDSJsonObject>(author: string, withVotes: boolean | undefined, observer: string | undefined, fields: string | string[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
-  getRootPostsByAuthor<T = SDSJsonObject>(author: string, withVotes?: boolean, observer?: string, fields?: string | string[], limit?: number, offset?: number): Promise<T>;
+  getRootPostsByAuthor<T = SDSJsonObject>(author: string, withVotes: boolean | undefined, observer: string | undefined, fields: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[] | undefined, limit: number | undefined, offset: number | undefined, callback: Callback<T>): Promise<void>;
+  getRootPostsByAuthor<T = SDSJsonObject>(author: string, withVotes?: boolean, observer?: string, fields?: PostsApiFieldsCsv | `${PostsApiFieldsCsv},${string}` | PostsApiFieldsCsv[], limit?: number, offset?: number): Promise<T>;
 }
 
 
@@ -8607,3 +8607,19 @@ export interface SDSModules {
   /** `system_api` */
   system: SystemApi;
 }
+
+
+/** Allowed values of `blocks_api.opTypes` (`fixed_csv`) — pass an array or `value,value,…`; `*` matches everything. */
+export type BlocksApiOpTypesCsv = "account_create" | "account_create_with_delegation" | "account_update" | "account_update2" | "account_witness_proxy" | "account_witness_vote" | "author_reward" | "cancel_transfer_from_savings" | "change_recovery_account" | "claim_account" | "claim_reward_balance" | "comment" | "comment_benefactor_reward" | "comment_options" | "convert" | "create_claimed_account" | "create_proposal" | "curation_reward" | "custom" | "custom_json" | "decline_voting_rights" | "delegate_vesting_shares" | "delete_comment" | "escrow_approve" | "escrow_dispute" | "escrow_release" | "escrow_transfer" | "feed_publish" | "fill_convert_request" | "fill_order" | "fill_transfer_from_savings" | "fill_vesting_withdraw" | "hardfork" | "hardfork23" | "interest" | "limit_order_cancel" | "limit_order_create" | "limit_order_create2" | "liquidity_reward" | "pow" | "pow2" | "producer_reward" | "proposal_pay" | "recover_account" | "remove_proposal" | "request_account_recovery" | "return_vesting_delegation" | "set_withdraw_vesting_route" | "shutdown_witness" | "sps_fund" | "transfer" | "transfer_from_savings" | "transfer_to_savings" | "transfer_to_vesting" | "update_proposal_votes" | "vote" | "withdraw_vesting" | "witness_set_properties" | "witness_update" | "*";
+
+/** Allowed values of `steem_requests_api.ids` (`fixed_csv`) — pass an array or `value,value,…`; `*` matches everything. */
+export type SteemRequestsApiIdsCsv = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "*";
+
+/** Allowed values of `accounts_api.fields` (`fixed_csv`) — pass an array or `value,value,…`; `*` matches everything. */
+export type AccountsApiFieldsCsv = "name" | "recovery_account" | "reset_account" | "proxy" | "json_metadata" | "posting_json_metadata" | "created" | "last_root_post" | "last_post" | "last_vote_time" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_sync" | "reputation" | "curation_rewards" | "posting_rewards" | "mined" | "can_vote" | "balance" | "sbd_balance" | "reward_steem_balance" | "reward_sbd_balance" | "reward_vesting_balance" | "savings_balance" | "savings_sbd_balance" | "vesting_shares" | "received_vesting_shares" | "delegated_vesting_shares" | "to_withdraw" | "withdrawn" | "vesting_withdraw_rate" | "next_vesting_withdrawal" | "max_rc" | "max_rc_creation_adjustment" | "rc_manabar" | "voting_manabar" | "downvote_manabar" | "voting_power" | "witness_votes" | "withdraw_routes" | "savings_withdraw_requests" | "pending_claimed_accounts" | "proxied_vsf_votes" | "sbd_seconds" | "sbd_seconds_last_update" | "sbd_last_interest_payment" | "savings_sbd_seconds" | "savings_sbd_seconds_last_update" | "savings_sbd_last_interest_payment" | "owner" | "active" | "posting" | "memo_key" | "voting_csi" | "selfvote_rate" | "*";
+
+/** Allowed values of `accounts_api.fields` (`fixed_csv`) — pass an array or `value,value,…`; `*` matches everything. */
+export type AccountsApiFieldsCsv2 = "id" | "name" | "creator" | "recovery_account" | "reset_account" | "proxy" | "json_metadata" | "posting_json_metadata" | "created" | "last_action" | "last_comment" | "last_root_post" | "last_vote" | "last_account_recovery" | "last_account_update" | "last_owner_update" | "last_update" | "last_sync" | "reputation" | "voting_csi" | "selfvote_rate" | "curation_rewards" | "posting_rewards" | "mined" | "can_vote" | "observer_follows_author" | "observer_ignores_author" | "count_comments" | "count_root_posts" | "count_active_posts" | "count_replies" | "count_upvotes" | "count_upvoted" | "count_downvotes" | "count_downvoted" | "count_followers" | "count_following" | "balance_steem" | "balance_sbd" | "rewards_steem" | "rewards_sbd" | "rewards_vests" | "savings_steem" | "savings_sbd" | "vests_own" | "vests_in" | "vests_out" | "powerdown" | "powerdown_done" | "powerdown_rate" | "next_powerdown" | "upvote_mana_current" | "upvote_mana_max" | "upvote_mana_percent" | "upvote_mana_last_update" | "downvote_mana_current" | "downvote_mana_max" | "downvote_mana_percent" | "downvote_mana_last_update" | "rc_mana_current" | "rc_mana_max" | "rc_mana_percent" | "rc_mana_last_update" | "witness_votes" | "withdraw_routes" | "savings_withdraw_requests" | "pending_claimed_accounts" | "proxied_vsf_votes" | "sbd_seconds" | "sbd_seconds_last_update" | "sbd_last_interest_payment" | "savings_sbd_seconds" | "savings_sbd_seconds_last_update" | "savings_sbd_last_interest_payment" | "owner_account_auths" | "owner_key_auths" | "owner_weight_threshold" | "active_account_auths" | "active_key_auths" | "active_weight_threshold" | "posting_account_auths" | "posting_key_auths" | "posting_weight_threshold" | "memo_key" | "*";
+
+/** Allowed values of `posts_api.fields` (`fixed_csv`) — pass an array or `value,value,…`; `*` matches everything. */
+export type PostsApiFieldsCsv = "link_id" | "link_status" | "author_reputation" | "author_status" | "author_role" | "author_title" | "author" | "permlink" | "parent_author" | "parent_permlink" | "parent_link_id" | "root_author" | "root_permlink" | "root_title" | "beneficiaries" | "created" | "last_update" | "last_sync" | "cashout_time" | "payout" | "total_payout_value" | "curator_payout_value" | "pending_payout_value" | "net_rshares" | "total_vote_weight" | "max_accepted_payout" | "percent_steem_dollars" | "allow_curation_rewards" | "allow_votes" | "allow_replies" | "depth" | "children" | "resteem_count" | "upvote_count" | "downvote_count" | "word_count" | "observer_follows_author" | "observer_ignores_author" | "observer_resteem" | "observer_role" | "observer_title" | "observer_vote" | "observer_vote_percent" | "observer_vote_rshares" | "is_author_muted" | "is_muted" | "is_pinned" | "category" | "community" | "json_images" | "json_metadata" | "title" | "body" | "*";

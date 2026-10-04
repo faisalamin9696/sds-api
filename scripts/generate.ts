@@ -84,7 +84,31 @@ const argsNameOf = (moduleKey: string, method: SDSMethodMeta): string =>
 /* type mapping                                                        */
 /* ------------------------------------------------------------------ */
 
-function tsType(param: SDSParamMeta): string {
+/** Registered `fixed_csv` unions: values (joined by \0) → alias details. */
+const csvAliases = new Map<string, { name: string; label: string; values: string[] }>();
+/** Alias names already allocated (possibly to a different value set). */
+const csvAliasNames = new Set<string>();
+
+/**
+ * Stable, readable alias for a `fixed_csv` allow-list — `AccountsFieldsCsv`,
+ * `HistoryApiOpTypesCsv`, … Identical value sets share one alias; a name
+ * collision gets a numeric suffix.
+ */
+function csvAliasFor(param: SDSParamMeta, context: string): string {
+  const values = [...new Set([...(param.allowedValues ?? []), '*'])];
+  const signature = values.join('\u0000');
+  const existing = csvAliases.get(signature);
+  if (existing) return existing.name;
+  const base = `${pascal(context)}${pascal(param.name)}Csv`;
+  let name = base;
+  let suffix = 2;
+  while (csvAliasNames.has(name)) name = `${base}${suffix++}`;
+  csvAliasNames.add(name);
+  csvAliases.set(signature, { name, label: `${context}.${param.name}`, values });
+  return name;
+}
+
+function tsType(param: SDSParamMeta, context?: string): string {
   const type = param.type.trim().toLowerCase();
 
   if (type === 'int' || type === 'float' || type === 'number') {
@@ -104,9 +128,17 @@ function tsType(param: SDSParamMeta): string {
   }
 
   if (type === 'fixed_csv') {
-    // The value lists are long (up to ~80 entries), so a plain string/list is
-    // used here — the documented values are kept in the JSDoc and in the
-    // metadata (`describeMethod()`).
+    // Literal unions make editors suggest the allowed values inline
+    // (`fields: ['…']` pops every field name). The union mirrors the runtime
+    // validation exactly — unknown values throw SDSValidationError — while the
+    // template member keeps `value,value,…` comma strings working.
+    if (context && param.allowedValues?.length) {
+      const alias = csvAliasFor(param, context);
+      // Scalar member: one value or `value,value,…`. The alias must be a real
+      // `${…}` interpolation — bare text would mean the literal alias name.
+      const commaJoin = '`${' + alias + '},${string}`';
+      return `${alias} | ${commaJoin} | ${alias}[]`;
+    }
     return 'string | string[]';
   }
 
@@ -221,7 +253,7 @@ function signatureLines(meta: SDSMethodMeta, argsName: string): string[] {
   const withCallback = params
     .map((param, index) => {
       const name = positionalName(param.name, index);
-      const type = tsType(param);
+      const type = tsType(param, meta.module);
       return param.optional ? `${name}: ${type} | undefined` : `${name}: ${type}`;
     })
     .join(', ');
@@ -231,7 +263,7 @@ function signatureLines(meta: SDSMethodMeta, argsName: string): string[] {
   const plain = params
     .map((param, index) => {
       const name = positionalName(param.name, index);
-      const type = tsType(param);
+      const type = tsType(param, meta.module);
       if (param.optional && index > lastRequired) return `${name}?: ${type}`;
       return `${name}: ${type}${param.optional ? ' | undefined' : ''}`;
     })
@@ -248,7 +280,7 @@ function argsInterface(method: SDSMethodMeta, interfaceName: string): string[] {
   ];
   for (const param of method.params) {
     lines.push(`  /** ${paramDoc(param)} */`);
-    lines.push(`  ${propertyName(param.name)}${param.optional ? '?' : ''}: ${tsType(param)};`);
+    lines.push(`  ${propertyName(param.name)}${param.optional ? '?' : ''}: ${tsType(param, method.module)};`);
   }
   lines.push('}');
   return lines;
@@ -511,6 +543,15 @@ function generateTypes(reference: SDSApiReference): string {
   out.push('}');
   out.push('');
 
+  for (const alias of csvAliases.values()) {
+    out.push('');
+    out.push(
+      `/** Allowed values of \`${alias.label}\` (\`fixed_csv\`) — pass an array or \`value,value,…\`; \`*\` matches everything. */`,
+    );
+    out.push(`export type ${alias.name} = ${alias.values.map((value) => JSON.stringify(value)).join(' | ')};`);
+  }
+  out.push('');
+
   return out.join('\n');
 }
 
@@ -615,7 +656,7 @@ function implementationBlock(meta: SDSMethodMeta, argsName: string): string[] {
   if (meta.params.length) {
     lines.push(`interface ${argsName} {`);
     for (const param of meta.params) {
-      lines.push(`  ${propertyName(param.name)}${param.optional ? '?' : ''}: ${tsType(param)};  // ${paramDoc(param)}`);
+      lines.push(`  ${propertyName(param.name)}${param.optional ? '?' : ''}: ${tsType(param, meta.module)};  // ${paramDoc(param)}`);
     }
     lines.push('}');
     lines.push('');
