@@ -1,6 +1,6 @@
 # SDS Method Reference
 
-Generated from [`https://sds0.steemworld.org`](https://sds0.steemworld.org) — reference version `0.1.10`, 22 modules, 285 methods. Source: [github.com/faisalamin9696/sds](https://github.com/faisalamin9696/sds).
+Generated from [`https://sds0.steemworld.org`](https://sds0.steemworld.org) — reference version `0.1.10`, 22 modules, 285 methods. Source: [github.com/faisalamin9696/sds-api](https://github.com/faisalamin9696/sds-api).
 
 | Module | Namespace | Group | Methods |
 | --- | --- | --- | --- |

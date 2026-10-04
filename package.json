@@ -1,5 +1,5 @@
 {
-  "name": "@steempro/sds",
+  "name": "@steempro/sds-api",
   "version": "0.1.0",
   "description": "Typed JavaScript / TypeScript client for the Steem Blockchain Data Services (SDS) REST API — every module and method of sds0.steemworld.org, promise + callback support, custom SDS instances, retries and structured error handling.",
   "keywords": [
@@ -21,12 +21,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/faisalamin9696/sds.git"
+    "url": "git+https://github.com/faisalamin9696/sds-api.git"
   },
   "bugs": {
-    "url": "https://github.com/faisalamin9696/sds/issues"
+    "url": "https://github.com/faisalamin9696/sds-api/issues"
   },
-  "homepage": "https://github.com/faisalamin9696/sds#readme",
+  "homepage": "https://github.com/faisalamin9696/sds-api#readme",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

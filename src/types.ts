@@ -1,5 +1,5 @@
 /**
- * Public types of `@steempro/sds`.
+ * Public types of `@steempro/sds-api`.
  */
 import type { SDSError } from './errors';
 

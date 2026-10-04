@@ -2,7 +2,7 @@
  * The SDS client.
  *
  * ```ts
- * import { SDS } from '@steempro/sds';
+ * import { SDS } from '@steempro/sds-api';
  *
  * const sds = new SDS({ instance: 'sds0' });       // https://sds0.steemworld.org
  * const info = await sds.chain.getChainStats();    // promise style
@@ -486,5 +486,5 @@ export class SDS implements SDSModules {
   }
 }
 
-/** Default export for `import SDS from '@steempro/sds'`. */
+/** Default export for `import SDS from '@steempro/sds-api'`. */
 export default SDS;

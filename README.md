@@ -1,12 +1,12 @@
-# @steempro/sds
+# @steempro/sds-api
 
-[![npm version](https://img.shields.io/npm/v/@steempro/sds.svg)](https://www.npmjs.com/package/@steempro/sds)
-[![license](https://img.shields.io/npm/license/@steempro/sds.svg)](https://github.com/faisalamin9696/sds/blob/main/LICENSE)
-[![node](https://img.shields.io/node/v/@steempro/sds.svg)](https://www.npmjs.com/package/@steempro/sds)
+[![npm version](https://img.shields.io/npm/v/@steempro/sds-api.svg)](https://www.npmjs.com/package/@steempro/sds-api)
+[![license](https://img.shields.io/npm/license/@steempro/sds-api.svg)](https://github.com/faisalamin9696/sds-api/blob/main/LICENSE)
+[![node](https://img.shields.io/node/v/@steempro/sds-api.svg)](https://www.npmjs.com/package/@steempro/sds-api)
 
 Typed JavaScript / TypeScript client for the **Steem Blockchain Data Services
 (SDS)** REST API — [sds0.steemworld.org](https://sds0.steemworld.org).
-Source: [github.com/faisalamin9696/sds](https://github.com/faisalamin9696/sds).
+Source: [github.com/faisalamin9696/sds-api](https://github.com/faisalamin9696/sds-api).
 
 - **Every module and method** of the SDS reference: 22 modules, 285 methods,
   fully typed with generated parameter/result interfaces.
@@ -22,7 +22,7 @@ Source: [github.com/faisalamin9696/sds](https://github.com/faisalamin9696/sds).
   (anything with `fetch`).
 
 ```bash
-npm i @steempro/sds
+npm i @steempro/sds-api
 ```
 
 📚 **[Full documentation](documentation.md)** — every one of the 285 methods
@@ -32,7 +32,7 @@ indexed, with signatures, parameters and runnable examples.
 ## Quick start
 
 ```ts
-import { SDS } from '@steempro/sds';
+import { SDS } from '@steempro/sds-api';
 
 const sds = new SDS(); // → https://sds0.steemworld.org
 
@@ -49,7 +49,7 @@ sds.posts.getPost('steemchiller', 'hello', (error, post) => {
 ESM and CommonJS are both supported:
 
 ```js
-const { SDS } = require('@steempro/sds');
+const { SDS } = require('@steempro/sds-api');
 ```
 
 ## Choosing an SDS instance
@@ -65,7 +65,7 @@ new SDS({ instance: 'sds9', instances: { sds9: 'https://sds9.example.org' } });
 Register an instance for the whole process:
 
 ```ts
-import { registerInstance, listInstances } from '@steempro/sds';
+import { registerInstance, listInstances } from '@steempro/sds-api';
 
 registerInstance('sds9', 'https://sds9.example.org');
 const sds = new SDS({ instance: 'sds9' });
@@ -106,7 +106,7 @@ await sds.communities.getCommunity('160125');        // ❌ SDSValidationError
                                                      //    "…must be a hive community id
                                                      //     starting with \"hive-\" (e.g. \"hive-160125\")"
 // The rule is exported for your own checks:
-import { isCommunityParam, COMMUNITY_ID_PATTERN } from '@steempro/sds';
+import { isCommunityParam, COMMUNITY_ID_PATTERN } from '@steempro/sds-api';
 ```
 
 **Timestamp parameters** (`fromTime`, `toTime`, `blockTime`, …) accept **any
@@ -131,7 +131,7 @@ await sds.chain.getBlockInfoByTime(1600000000000);           // ms auto-detected
 // timestamp in seconds (12+ digit numbers are read as milliseconds).
 
 // The conversion is exported for your own code:
-import { coerceTimestamp, isTimestampParam } from '@steempro/sds';
+import { coerceTimestamp, isTimestampParam } from '@steempro/sds-api';
 coerceTimestamp('2020-09-13');   // 1599955200 (2020-09-13T00:00:00Z)
 ```
 
@@ -170,7 +170,7 @@ Some SDS list/search methods return a column oriented table instead of objects:
 through unchanged**, so it is safe to chain on any call:
 
 ```ts
-import { mapSds, isSDSTable } from '@steempro/sds';
+import { mapSds, isSDSTable } from '@steempro/sds-api';
 
 const rows = mapSds(await sds.feeds.getActivePostsByCreated({ limit: 1 }));
 // [{ link_id: 114136936, author: 'alice', permlink: 'hello', … }, …]
@@ -206,7 +206,7 @@ Every failure is an `SDSError` subclass with a stable `code`, plus the
 | `SDSApiError`         | `ERR_SDS_API`          | Application error: `{ code: -1, error: "…" }`     |
 
 ```ts
-import { SDSApiError, isSDSError } from '@steempro/sds';
+import { SDSApiError, isSDSError } from '@steempro/sds-api';
 
 try {
   await sds.posts.getPost('alice', 'missing');
@@ -265,7 +265,7 @@ const sds = new SDS({
 The bundled reference can be queried at runtime:
 
 ```ts
-import { listModules, listMethods, findMethod, API_REFERENCE } from '@steempro/sds';
+import { listModules, listMethods, findMethod, API_REFERENCE } from '@steempro/sds-api';
 
 sds.listModules();                          // 22 modules
 sds.listMethods('chain_api');               // methods of one module
@@ -286,7 +286,7 @@ The package ships its own types (`ESM` + `CJS` + `.d.ts`). Every method has
 generated argument interfaces and result types:
 
 ```ts
-import type { ChainGetAccountNamesArgs, PostsGetPostArgs } from '@steempro/sds';
+import type { ChainGetAccountNamesArgs, PostsGetPostArgs } from '@steempro/sds-api';
 
 const args: ChainGetAccountNamesArgs = { limit: 10, offset: 0 };
 const names = await sds.chain.getAccountNames(args);

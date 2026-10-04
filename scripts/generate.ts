@@ -24,9 +24,9 @@ const BANNER = `/* eslint-disable */
  */`;
 
 /** Repository of this package (linked from every generated document). */
-const REPO_URL = 'https://github.com/faisalamin9696/sds';
+const REPO_URL = 'https://github.com/faisalamin9696/sds-api';
 /** Human readable repository link text. */
-const REPO_NAME = 'github.com/faisalamin9696/sds';
+const REPO_NAME = 'github.com/faisalamin9696/sds-api';
 
 let sourceBase = 'https://sds0.steemworld.org';
 
@@ -679,7 +679,7 @@ function generateDocumentation(reference: SDSApiReference): string {
   /* front matter                                                      */
   /* ---------------------------------------------------------------- */
 
-  out.push('# `@steempro/sds` — Full Documentation');
+  out.push('# `@steempro/sds-api` — Full Documentation');
   out.push('');
   out.push(
     `Generated from [\`${reference.source}\`](${reference.source}) — reference version \`${reference.version}\`, ` +
@@ -709,12 +709,12 @@ function generateDocumentation(reference: SDSApiReference): string {
   out.push('## Installation');
   out.push('');
   out.push('```bash');
-  out.push('npm i @steempro/sds');
+  out.push('npm i @steempro/sds-api');
   out.push('```');
   out.push('');
   out.push('```ts');
-  out.push("import { SDS } from '@steempro/sds';       // ESM / TypeScript");
-  out.push("const { SDS } = require('@steempro/sds');  // CommonJS");
+  out.push("import { SDS } from '@steempro/sds-api';       // ESM / TypeScript");
+  out.push("const { SDS } = require('@steempro/sds-api');  // CommonJS");
   out.push('```');
   out.push('');
   out.push('Requires Node 18+ (or Deno / Bun / a browser — anything with `fetch`), or pass your own `{ fetch }`.');
@@ -737,7 +737,7 @@ function generateDocumentation(reference: SDSApiReference): string {
   out.push('| `onRequest` / `onResponse` | – | Logging / tracing hooks |');
   out.push('');
   out.push('```ts');
-  out.push("import { SDS, registerInstance, listInstances, DEFAULT_SDS_INSTANCES } from '@steempro/sds';");
+  out.push("import { SDS, registerInstance, listInstances, DEFAULT_SDS_INSTANCES } from '@steempro/sds-api';");
   out.push('');
   out.push("const sds0 = new SDS();                                  // https://sds0.steemworld.org");
   out.push("const sds1 = new SDS({ instance: 'sds1' });              // https://sds1.steemworld.org");
@@ -814,7 +814,7 @@ function generateDocumentation(reference: SDSApiReference): string {
   out.push('(plain JSON, arrays, raw `{ code, result }` envelopes) through unchanged:');
   out.push('');
   out.push('```ts');
-  out.push("import { mapSds, isSDSTable } from '@steempro/sds';");
+  out.push("import { mapSds, isSDSTable } from '@steempro/sds-api';");
   out.push('');
   out.push("const feed = await sds.feeds.getActivePostsByCreated({ limit: 1 });");
   out.push('const rows = mapSds(feed);');
@@ -888,7 +888,7 @@ function generateDocumentation(reference: SDSApiReference): string {
   out.push('| `SDSApiError` | `ERR_SDS_API` | Application error `{ code: -1, error }` (`error.apiCode`) |');
   out.push('');
   out.push('```ts');
-  out.push("import { SDSApiError, isSDSError } from '@steempro/sds';");
+  out.push("import { SDSApiError, isSDSError } from '@steempro/sds-api';");
   out.push('');
   out.push('try {');
   out.push("  await sds.posts.getPost('alice', 'missing');");
@@ -918,7 +918,7 @@ function generateDocumentation(reference: SDSApiReference): string {
   out.push("sds.module('chain_api');                          // → sds.chain namespace");
   out.push('sds.referenceVersion;                             // bundled reference version');
   out.push('');
-  out.push("import { listModules, listMethods, findMethod, API_REFERENCE } from '@steempro/sds';");
+  out.push("import { listModules, listMethods, findMethod, API_REFERENCE } from '@steempro/sds-api';");
   out.push('```');
   out.push('');
 

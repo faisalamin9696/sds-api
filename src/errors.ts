@@ -1,5 +1,5 @@
 /**
- * Error hierarchy of `@steempro/sds`.
+ * Error hierarchy of `@steempro/sds-api`.
  *
  * Every error produced by the library extends {@link SDSError} and carries a
  * stable machine readable `code`, plus the `module`, `method` and `url` of the

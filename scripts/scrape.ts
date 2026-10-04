@@ -42,7 +42,7 @@ async function fetchText(url: string, attempts = 3): Promise<string> {
   for (let attempt = 0; attempt < attempts; attempt++) {
     try {
       const response = await fetch(url, {
-        headers: { 'user-agent': '@steempro/sds scraper', accept: 'text/html' },
+        headers: { 'user-agent': '@steempro/sds-api scraper', accept: 'text/html' },
       });
       if (response.status === 404) {
         throw Object.assign(new Error(`404 for ${url}`), { fatal: true });

@@ -1,10 +1,10 @@
 /**
- * `@steempro/sds` — typed JavaScript / TypeScript client for the Steem
+ * `@steempro/sds-api` — typed JavaScript / TypeScript client for the Steem
  * Blockchain Data Services (SDS) REST API (https://sds0.steemworld.org).
  *
  * @example Promise style
  * ```ts
- * import { SDS } from '@steempro/sds';
+ * import { SDS } from '@steempro/sds-api';
  *
  * const sds = new SDS({ instance: 'sds0' });
  * const stats = await sds.chain.getChainStats();
