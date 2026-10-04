@@ -1,0 +1,75 @@
+{
+  "name": "@steempro/sds",
+  "version": "0.1.0",
+  "description": "Typed JavaScript / TypeScript client for the Steem Blockchain Data Services (SDS) REST API — every module and method of sds0.steemworld.org, promise + callback support, custom SDS instances, retries and structured error handling.",
+  "keywords": [
+    "steem",
+    "sds",
+    "steemworld",
+    "blockchain",
+    "api",
+    "client",
+    "sdk",
+    "typescript",
+    "rest"
+  ],
+  "license": "MIT",
+  "author": "faisalamin9696",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/faisalamin9696/sds.git"
+  },
+  "bugs": {
+    "url": "https://github.com/faisalamin9696/sds/issues"
+  },
+  "homepage": "https://github.com/faisalamin9696/sds#readme",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "docs",
+    "documentation.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:live": "node scripts/run-live-tests.mjs",
+    "check:docs": "node scripts/check-docs.mjs",
+    "check:community": "node scripts/check-community-urls.mjs",
+    "check:urls": "node scripts/check-example-urls.mjs",
+    "scrape": "tsx scripts/scrape.ts",
+    "generate": "tsx scripts/generate.ts",
+    "prepublishOnly": "npm run typecheck && npm run test && npm run build && npm run check:docs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "node-html-parser": "^6.1.13",
+    "tsx": "^4.19.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
