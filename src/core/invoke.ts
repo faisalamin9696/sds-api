@@ -51,7 +51,7 @@ export async function invoke(
       method: target.method,
       attempt,
     };
-    const startedAt = Date.now();
+    const startedAt = nowMs();
 
     try {
       options.onRequest?.(requestInfo);
@@ -65,7 +65,7 @@ export async function invoke(
       notifyResponse(options, {
         ...requestInfo,
         status,
-        durationMs: Date.now() - startedAt,
+        durationMs: nowMs() - startedAt,
         ok: true,
       });
       return result;
@@ -75,7 +75,7 @@ export async function invoke(
       notifyResponse(options, {
         ...requestInfo,
         status: statusOf(error),
-        durationMs: Date.now() - startedAt,
+        durationMs: nowMs() - startedAt,
         ok: false,
         error,
       });
@@ -112,6 +112,33 @@ export function settle<T>(promise: Promise<T>, callback?: Callback<T>): Promise<
 /* ------------------------------------------------------------------ */
 /* internals                                                           */
 /* ------------------------------------------------------------------ */
+
+/**
+ * Milliseconds on a monotonic clock, for measuring how long a request took.
+ *
+ * Deliberately **not** `Date.now()`. Wall-clock time is a form of IO: a
+ * prerender must be reproducible, so any framework that guarantees identical
+ * output across renders instruments `Date` and aborts the render when it is
+ * read. Next.js does exactly that — reading `Date.now()` here used to fail
+ * `steempro-next`'s `/home/[category]` prerender with
+ * `blocking-prerender-current-time` (`E1432`), even though the value only fed
+ * the `durationMs` telemetry field and no `onResponse` hook was registered.
+ *
+ * `performance.now()` is the sanctioned introspection API (Next reserves
+ * `Date` for output and `performance` for measurement) and is never
+ * instrumented. It is also monotonic, so an NTP step or DST change during a
+ * retry cannot yield a negative duration.
+ *
+ * Falls back to `0` rather than `Date.now()` so an embedder without
+ * `performance` reports an unknown duration instead of reintroducing the
+ * problem: Node >= 16, every browser and every worker expose it, so the
+ * fallback is unreachable on any platform `engines.node >= 18` allows.
+ */
+function nowMs(): number {
+  return typeof performance === 'object' && typeof performance.now === 'function'
+    ? performance.now()
+    : 0;
+}
 
 function deliver(callback: Callback<any>, error: SDSError | null, value?: unknown): void {
   try {

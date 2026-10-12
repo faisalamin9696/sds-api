@@ -402,6 +402,46 @@ describe('options', () => {
     expect(onResponse.mock.calls[0][0]).toMatchObject({ ok: true, status: 200 });
   });
 
+  it('measures duration without reading the wall clock', async () => {
+    // A prerender must be reproducible, so frameworks instrument `Date` and
+    // abort a render the moment it is read — Next.js raises
+    // `blocking-prerender-current-time` (E1432). `durationMs` is telemetry, so
+    // it has to come from `performance.now()`; this fails if anything in the
+    // request path reaches for `Date.now()` again.
+    const dateNow = vi.spyOn(Date, 'now');
+    const onResponse = vi.fn();
+    try {
+      const { fetchImpl } = mockFetch(() => ok(null));
+      await client(fetchImpl, { onResponse }).chain.getConfig();
+
+      expect(dateNow).not.toHaveBeenCalled();
+      const info = onResponse.mock.calls[0][0];
+      expect(Number.isFinite(info.durationMs)).toBe(true);
+      expect(info.durationMs).toBeGreaterThanOrEqual(0);
+    } finally {
+      dateNow.mockRestore();
+    }
+  });
+
+  it('the error path measures duration without the wall clock either', async () => {
+    // Same guarantee on the `ok: false` branch, which is reached on every
+    // failed or retryable response.
+    const dateNow = vi.spyOn(Date, 'now');
+    const onResponse = vi.fn();
+    try {
+      const { fetchImpl } = mockFetch(() => html(500, 'boom'));
+      await expect(
+        client(fetchImpl, { onResponse }).chain.getConfig(),
+      ).rejects.toThrow();
+
+      expect(dateNow).not.toHaveBeenCalled();
+      expect(onResponse.mock.calls[0][0]).toMatchObject({ ok: false });
+      expect(onResponse.mock.calls[0][0].durationMs).toBeGreaterThanOrEqual(0);
+    } finally {
+      dateNow.mockRestore();
+    }
+  });
+
   it('hook exceptions never break a call', async () => {
     const { fetchImpl } = mockFetch(() => ok('fine'));
     const sds = new SDS({
